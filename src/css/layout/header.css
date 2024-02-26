@@ -1,0 +1,24 @@
+header{
+
+    @apply 
+       relative
+       h-[8rem] xg:h-[10rem]
+       py-2 md:py-3;
+
+      [data-info="on"] &{
+        display: none;
+      }
+
+}
+
+.case, .password{
+
+    header{
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+
+}
+
+

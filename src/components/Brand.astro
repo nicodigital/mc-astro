@@ -1,0 +1,42 @@
+---
+const homeUrl = import.meta.env.HOME_URL ?? "/";
+// console.log(siteUrl);
+---
+
+<style>
+
+  .brand{
+    @apply 
+    relative block
+    top-1 xg:top-0
+    cursor-pointer 
+    transition-all;
+
+
+    span{
+        @apply transition-all;
+    }
+
+  }
+
+  @media (min-width: theme("screens.xl")) {
+    .brand {
+      span {
+        opacity: 0;
+      }
+
+      &:hover {
+        span {
+          opacity: 1;
+        }
+      }
+    }
+  }
+</style>
+
+<a class="brand" href={homeUrl} data-astro-prefetch="hover" >
+  <div class="xg:hidden">MCD</div>
+  <div class="hidden xg:block">
+    M<span>artín</span> C<span>orbo</span> D<span>esign</span>
+  </div>
+</a>

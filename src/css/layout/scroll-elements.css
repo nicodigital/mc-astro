@@ -1,0 +1,22 @@
+body{
+
+  &[data-scroll="down"].case{
+
+    .more-info, .time{
+       color: #fff
+     }
+
+ }
+
+  /* &:not([data-scroll="top"]){
+
+  } */
+
+
+  /* &[data-scroll="bottom"] {
+
+    
+  } */
+
+}
+

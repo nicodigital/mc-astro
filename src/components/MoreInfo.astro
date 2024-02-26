@@ -1,0 +1,34 @@
+<style>
+  .more-info {
+    @apply cursor-pointer;
+
+    span {
+      @apply inline-block w-[1.2rem];
+
+      &:last-child {
+        display: none;
+      }
+
+      [data-info="on"] & {
+        &:first-child {
+          display: none;
+        }
+
+        &:last-child {
+          @apply inline-block;
+        }
+      }
+    }
+  }
+</style>
+
+<div class="more-info">
+  <span>+</span>
+  <span>-</span>
+  Information
+</div>
+
+<script>
+  import moreInfo from '../js/moreInfo'
+  moreInfo();
+</script>

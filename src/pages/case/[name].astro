@@ -1,10 +1,13 @@
 ---
 import type { GetStaticPaths } from "astro";
 import Layout from "../../layout/Layout.astro";
-import PictureVideo from '../../components/PictureVideo.astro'
+import PictureVideo from "../../components/PictureVideo.astro";
+import MoreLess from "../../components/MoreLess.astro";
 import charsCodes from "../../js/charsCodes";
 import types from "../../js/types";
+
 const homeUrl = import.meta.env.HOME_URL ?? "/";
+const currURL = Astro.url.href;
 
 const { name } = Astro.params;
 // console.log(caso);
@@ -49,11 +52,25 @@ const PASS = ACF.pass;
 // console.log(CLIENT);
 ---
 
-<Layout
-  title={TITLE}
-  claim="Martin Corbo Design."
-  description={DESC}
->
+<style>
+  @media (max-width: theme("screens.xg")) {
+    .toggle-content {
+      height: auto;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.2s ease-in-out;
+
+      &.active {
+        opacity: 1;
+        max-height: 100vh;
+      }
+    }
+  }
+</style>
+
+<Layout title={TITLE} claim="Martin Corbo Design." description={DESC}>
   <!-- Head Info -->
   <section class="head-info animate anim-on" data-anim="bottom">
     <div class="container row section-b items-start">
@@ -79,11 +96,23 @@ const PASS = ACF.pass;
 
     <div class="container row section-b">
       <div class="col-[1/7] xg:hidden">
-        <div class="toggle-info underline" data-toggle="info">
-          <span>More info</span>
-          <span>Less info</span>
-        </div>
+        <MoreLess />
       </div>
+
+      {
+        WEBSITE && (
+          <div class="col-[7/13] xg:hidden">
+            <a
+              href={WEBSITE}
+              class="underline"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              View Live site
+            </a>
+          </div>
+        )
+      }
 
       <div class="col-[1/13] xg:col-[1/5] pointer-events-none">
         <article>
@@ -98,51 +127,63 @@ const PASS = ACF.pass;
       </div>
     </div>
 
-    <div class="container row hidden xg:grid place-content-end ctr-gap-bottom">
-      <div class="col-[1/13] xg:col-[1/3]">
-        <a href={homeUrl} class="underline">
-          Back to Index
-        </a>
-      </div>
+    <div class="hidden xg:block ctr-gap-bottom">
+      <div class="container row place-content-end">
+        <div class="col-[1/13] xg:col-[1/3]">
+          <a href={homeUrl} class="underline"> Back to Index</a>
+        </div>
 
-      { WEBSITE && (
-          <div class="col-7-13 col-md-3-6">
-              <a href={WEBSITE} class="underline" target='_blank' rel='noreferrer noopener'  >
+        {
+          WEBSITE && (
+            <div class="col-[7/13] xg:col-[3/6]">
+              <a
+                href={WEBSITE}
+                class="underline"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
                 View Live site
               </a>
-          </div>
-      ) }
-
+            </div>
+          )
+        }
+      </div>
     </div>
+    
   </section>
 
   <!-- Gallery -->
-  <section id="Gallery" class="container row section-t ctr-gap-bottom animate anim-on" data-anim="bottom" >
-
-    { GALLERY && (
-
-    <div class="gallery col-[1/13] xg:col-[6/13] grid gap-2">
-
-      {
-        GALLERY.map( item => {
-
-          return <PictureVideo {item} style="animate" ext="webp" layout={item.acf_fc_layout} anim="bottom" />
-      
-        })
-      }
-
-    </div>
-
-    ) }
+  <section
+    id="Gallery"
+    class="container row section-t ctr-gap-bottom animate anim-on"
+    data-anim="bottom"
+  >
+    {
+      GALLERY && (
+        <div class="gallery col-[1/13] xg:col-[6/13] grid gap-2">
+          {GALLERY.map((item) => {
+            return (
+              <PictureVideo
+                {item}
+                style="animate"
+                ext="webp"
+                layout={item.acf_fc_layout}
+                anim="bottom"
+              />
+            );
+          })}
+        </div>
+      )
+    }
   </section>
 
   <section class="md:hidden ctr-gap-top pb-10">
     <div class="container row">
-      <a href={homeUrl} class="underline">
-        Back to Index
-      </a>
+      <div class="col-[1/7]">
+        <a href={homeUrl} class="underline"> Back to Index</a>
+      </div>
       <div class="col-[7/13] text-right">
-        <a href="#top" class="underline"> Back to top</a>
+        <a href=`${currURL}#top` class="underline"> Back to top</a>
       </div>
     </div>
   </section>

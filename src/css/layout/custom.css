@@ -6,11 +6,19 @@
   @apply flex flex-col justify-between section-t md:h-screen;
 }
 
-[data-page="case"]{
-  .head-info{
-    @apply fixed;
+@media (min-width: theme("screens.xg")) {
+
+  [data-page="case"]{
+    .head-info{
+      @apply fixed;
+    }
   }
+  
 }
+
+
+
+
 
 
 

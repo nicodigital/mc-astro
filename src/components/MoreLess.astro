@@ -1,0 +1,65 @@
+<style>
+  .toggle-info {
+    span:last-child {
+      display: none;
+    }
+
+    &.active {
+      span {
+        &:first-child {
+          display: none;
+        }
+
+        &:last-child {
+          display: block;
+        }
+      }
+    }
+  }
+</style>
+
+<div class="toggle-info underline" data-toggle="info">
+  <span>More info</span>
+  <span>Less info</span>
+</div>
+
+<script>
+
+  function moreLess() {
+
+    const toggleInfo = document.querySelectorAll(".toggle-info");
+
+    toggleInfo.forEach((toggle) => {
+
+      toggle.addEventListener("click", (e) => {
+
+        let curr_data = toggle.dataset.toggle;
+
+        if (toggle.classList.contains("active")) {
+          toggle.classList.remove("active");
+        } else {
+          toggle.classList.add("active");
+        }
+
+        let toggleContent = document.querySelector(
+          ".toggle-content[data-toggle=" + curr_data + "]"
+        );
+
+        if (toggleContent.classList.contains("active")) {
+          toggleContent.classList.remove("active");
+        } else {
+          toggleContent.classList.add("active");
+        }
+      });
+
+    });
+
+  }
+  
+  moreLess()
+
+  document.addEventListener('astro:after-swap', function () {
+    moreLess()
+  });
+
+</script>

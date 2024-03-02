@@ -27,13 +27,9 @@ const currCase = getCases.find((item) => item.slug == caso);
 
 const ID = currCase.id;
 const SLUG = currCase.slug;
-// const TITLE = charsCodes(currCase.title.rendered);
-
 const CLIENT = currCase.acf.client[0]?.name;
-const AGENCY = currCase.acf.agency[0]?.name;
 const TYPE = currCase.acf.type;
 const YEAR = currCase.acf.year;
-const PASS = currCase.acf.pass;
 ---
 
 <Layout

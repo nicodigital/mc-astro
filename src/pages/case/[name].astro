@@ -7,7 +7,7 @@ import charsCodes from "../../js/charsCodes";
 import types from "../../js/types";
 
 const homeUrl = import.meta.env.HOME_URL ?? "/";
-const currURL = Astro.url.href;
+const currPath = Astro.url.pathname;
 
 const { name } = Astro.params;
 // console.log(caso);
@@ -183,7 +183,7 @@ const PASS = ACF.pass;
         <a href={homeUrl} class="underline"> Back to Index</a>
       </div>
       <div class="col-[7/13] text-right">
-        <a href=`${currURL}#top` class="underline"> Back to top</a>
+        <a href=`${currPath}#top` class="underline"> Back to top</a>
       </div>
     </div>
   </section>

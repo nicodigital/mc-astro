@@ -5,9 +5,8 @@ const OPTIONS = await RESPONSE.json();
 const IMPRINT = OPTIONS.acf.imprint;
 const TOUCH = OPTIONS.acf.get_touch;
 const SOCIAL = OPTIONS.acf.social;
+const currPath = Astro.url.pathname;
 
-const currURL = Astro.url.href;
-// console.log(CREDITS)
 ---
 
 <section class="section container">
@@ -19,7 +18,7 @@ const currURL = Astro.url.href;
       <Fragment set:html={TOUCH} />
     </div>
     <div class="col-[7/13] xg:col-[10/13] hidden md:block text-right">
-      <a href=`${currURL}#top` class="smooth"> Back to top</a>
+      <a href=`${currPath}#top` class="smooth"> Back to top</a>
     </div>
   </div>
   <!--/row-->

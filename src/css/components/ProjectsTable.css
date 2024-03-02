@@ -1,0 +1,143 @@
+.table {
+
+  ul {
+    @apply p-0;
+  }
+
+  .case {
+    @apply relative container py-2;
+
+    & .date {
+      @apply text-right;
+    }
+
+  }
+
+  ul {
+    li {
+      @apply relative;
+
+      &:before {
+        position: absolute;
+        content: "";
+        width: calc(100% - var(--container-gap) * 2);
+        height: 1px;
+        background: #000;
+        left: var(--container-gap);
+        bottom: 0;
+        z-index: -1;
+      }
+    }
+  }
+
+  &.line-top ul {
+
+    li:first-child:after {
+
+      position: absolute;
+      content: "";
+      width: calc(100% - var(--container-gap) * 2);
+      height: 1px;
+      background: #000;
+      left: var(--container-gap);
+      top: 0;
+      z-index: -1;
+
+    }
+
+  }
+}
+
+.thumbs {
+  @apply relative hidden xg:block transition-all;
+
+  img {
+    @apply pointer-events-none transition-all;
+  }
+}
+
+@media (min-width: theme("screens.xg")) {
+
+  .case{
+
+		.head-info{
+			position: fixed;
+		}
+
+		a{
+			position: relative;
+			z-index: 10;
+		}
+
+		&:hover{
+
+			.thumbs{
+				opacity: 1;
+				transform: translate(100% , -9rem);
+
+				& > div{
+
+					&:nth-child(1){
+						filter: brightness(1.5);
+						animation-name: thumb1;
+						animation-duration: 1s;
+						animation-fill-mode: both;
+					}
+
+					&:nth-child(2){
+						animation-name: thumb2;
+						animation-duration: 1s;
+						animation-fill-mode: both;
+					}
+
+					&:nth-child(3){
+						filter: contrast(1.5) brightness(0.5);
+						animation-name: thumb3;
+						animation-duration: 1s;
+						animation-fill-mode: both;
+					}
+
+				}
+
+			}
+
+		}
+
+	}
+
+  .thumbs {
+    position: absolute;
+    top: 0;
+    left: 12%;
+    width: 33%;
+    height: 30rem;
+    opacity: 0;
+    transform: translate(100%, -6rem);
+    pointer-events: none;
+    transition: all 0.3s ease;
+
+    & > div {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #000;
+      transform: translate(0, 0);
+      transition: all 0.3s ease;
+
+      &:nth-child(1) {
+        z-index: 1;
+      }
+
+      &:nth-child(2) {
+        z-index: 2;
+      }
+
+      &:nth-child(3) {
+        z-index: 3;
+      }
+    }
+
+  }
+
+}

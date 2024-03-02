@@ -1,0 +1,60 @@
+---
+/* Get Options */
+const RESPONSE = await fetch(import.meta.env.API_OPTIONS);
+const OPTIONS = await RESPONSE.json();
+const IMPRINT = OPTIONS.acf.imprint;
+const TOUCH = OPTIONS.acf.get_touch;
+const SOCIAL = OPTIONS.acf.social;
+// console.log(CREDITS)
+---
+
+<section class="section container">
+  <div class="row section-b">
+    <div class="col-[1/7] xg:col-[1/6]">
+      <h2>Get in Touch</h2>
+    </div>
+    <div class="col-[7/13] xg:col-[6/10]">
+      <Fragment set:html={TOUCH} />
+    </div>
+    <div class="col-[7/13] xg:col-[10/13] hidden md:block text-right">
+      <a href="#top" class="smooth"> Back to top</a>
+    </div>
+  </div>
+  <!--/row-->
+
+  <div class="row section-b">
+    <div class="col-[1/7] xg:col-[1/6]">
+      <h3 class="mb-0">Social</h3>
+    </div>
+    <div class="col-[7/13] xg:col-[6/9]">
+      <ul class="grid grid-cols-2 underline">
+        {
+          SOCIAL &&
+            SOCIAL.map((red) => (
+
+              <li>
+                <a
+                  href={ red.link }
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  { red.txt }
+                </a>
+              </li>
+
+            ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-[1/7] xg:col-[1/6]">
+      <h2>Imprint</h2>
+    </div>
+    <div class="col-[7/13] xg:col-[6/10]">
+      <Fragment set:html={IMPRINT} />
+    </div>
+  </div>
+  <!--/row-->
+</section>

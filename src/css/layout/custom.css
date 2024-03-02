@@ -2,7 +2,15 @@
   @apply bg-neutral-800 text-white p-2 rounded-lg flex items-center justify-center;
 }
 
+.head-info{
+  @apply flex flex-col justify-between section-t md:h-screen;
+}
 
+[data-page="case"]{
+  .head-info{
+    @apply fixed;
+  }
+}
 
 
 

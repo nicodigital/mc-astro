@@ -1,6 +1,16 @@
 ---
 import "@fontsource/inconsolata";
-// import { ViewTransitions } from "astro:transitions";
+import { ViewTransitions } from "astro:transitions";
+
+/* Get Page */
+import getSlug from '../js/getSlug';
+import getFirstUrlTerm from '../js/getFirstUrlTerm';
+import getPage from '../js/getPage'
+const currentPath = Astro.url.pathname;
+const currPage = getSlug(currentPath);
+const firstUrlTerm = getFirstUrlTerm(currentPath);
+const dataPage = getPage(currPage, firstUrlTerm);
+
 import "../css/global.css";
 import Header from "./Header.astro";
 import Footer from "./Footer.astro";
@@ -8,6 +18,7 @@ import Modal from "../components/Modal.astro";
 import Favicon from "../components/Favicon.astro";
 import Seo from "../components/Seo.astro";
 // import getSlug from '../js/getSlug'
+import Information from '../sections/Information.astro'
 
 const {
   title = "Título de 65 caracteres",
@@ -17,8 +28,6 @@ const {
   robots,
 } = Astro.props;
 
-const currentPath = Astro.url.pathname;
-const currPage = currentPath.slice(1);
 
 ---
 <html lang="en">
@@ -37,20 +46,22 @@ const currPage = currentPath.slice(1);
       content="black-translucent"
     />
     <meta name="format-detection" content="telephone=no" />
-    <!-- <ViewTransitions /> -->
+    <ViewTransitions />
   </head>
-  <body id="top" data-page={currPage} data-scroll="top" >
+  <body id="top" data-page={dataPage} data-scroll="top" data-info="off" >
 
     {
-      currPage !== "gracias" &&  <Header />
+      currPage !== "thanks" &&  <Header />
     }
 
     <main>
       <slot />
     </main>
 
+    <Information/>
+
     {
-      currPage !== "gracias" && <Footer />
+      currPage !== "thanks" && <Footer />
     }
 
     <Modal name="demo" show="off" type="">

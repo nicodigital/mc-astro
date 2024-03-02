@@ -2,17 +2,10 @@
 import "../css/layout/header.css";
 import Brand from "../components/Brand.astro";
 import MoreInfo from '../components/MoreInfo.astro'
+import CurrenTime from '../components/CurrenTime.astro'
 // import Burger from "../components/Burger.astro";
 const homeUrl = import.meta.env.HOME_URL ?? '/';
 
-
-// Obtiene la fecha y hora actual
-let now = new Date();
-// Establece la zona horaria a 'America/Montevideo' (Uruguay)
-let options = { timeZone: 'America/Montevideo', hour12: true, hour: '2-digit', minute: '2-digit' };
-
-// Obtiene la hora formateada en el formato deseado (12 horas con AM/PM)
-let formattedTime = now.toLocaleTimeString('en-US', options );
 
 ---
 <header class="container row" >
@@ -25,7 +18,7 @@ let formattedTime = now.toLocaleTimeString('en-US', options );
     </div>
 
     <div class="col-[9/13] xg:col-[10/13] flex justify-end">
-        <span class="time">{formattedTime}</span>
+        <CurrenTime/>
     </div>
 
 </header>

@@ -1,0 +1,16 @@
+footer{
+
+    [data-info="on"] &{
+        display: none;
+    }
+
+}
+
+.footer{
+  @apply py-3 md:py-4;
+}
+
+ /* Padding bottom solo para IPHONE */
+:not([data-device="desktop"])[data-platform="ios"] .footer{
+  padding-bottom: 12rem !important;
+}

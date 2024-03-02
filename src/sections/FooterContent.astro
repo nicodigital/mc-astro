@@ -1,0 +1,32 @@
+---
+import { getHoy } from '../js/gethoy.js'
+const HOY = getHoy();
+
+/* Get Options */
+const RESPONSE = await fetch(import.meta.env.API_OPTIONS);
+const OPTIONS = await RESPONSE.json();
+const CREDITS = OPTIONS.acf.credits;
+
+
+---
+
+<div class="footer container row">
+
+  <div class="col-[1/13] xg:col-[1/6] flex flex-col justify-between">
+    <h2 class="mb-2">Credits</h2>
+    <div class="hidden md:block">© 2024 Martín Corbo</div>
+  </div>
+
+  <div class="col-[1/13] xg:col-[6/13] mb-7 md:mb-0">
+    <p class="mb-0">
+      {CREDITS}
+    </p>
+  </div>
+
+  <div class="col-[1/7] md:hidden">© {HOY} Martín Corbo</div>
+
+  <div class="col-[7/13] text-right md:hidden">
+    <a href="#top" class="underline">Back to top</a>
+  </div>
+
+</div>

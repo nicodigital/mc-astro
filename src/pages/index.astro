@@ -1,6 +1,8 @@
 ---
 // export const prerender = false;
 import Layout from "../layout/Layout.astro";
+import ProjectsTable from '../sections/ProjectsTable.astro'
+import PreFooter from '../sections/PreFooter.astro'
 ---
 
 <Layout
@@ -15,7 +17,7 @@ import Layout from "../layout/Layout.astro";
       <h1>Form. Follows. Function.</h1>
     </div>
  
-    <div class='col-[1/13] xg:col-[6/11]'>
+    <div class='col-[1/13] xg:col-[6/11] mt-6 xg:mt-0'>
         <p>
           Martín Corbo is a graphic designer and art director known for his minimalistic and impactful designs. He focuses on creating timeless designs that cater to the specific needs and goals of each brand, helping them create enduring and memorable identities.
         </p>
@@ -23,5 +25,21 @@ import Layout from "../layout/Layout.astro";
  
 </section>
 
+<!-- Projects -->
+<section class="section"  >
+  <div class="container mb-8 xg:mb-10">
+    <h2>
+      Selected Projects
+    </h2>
+  </div>
+  <div class="projects table w-full">
+    <ProjectsTable/>
+  </div>
+</section>
+
+
+<PreFooter/>
+
 
 </Layout>
+

@@ -1,0 +1,133 @@
+---
+import Brand from "../components/Brand.astro";
+import CurrenTime from "../components/CurrenTime.astro";
+import MoreInfo from "../components/MoreInfo.astro";
+import PreFooter from "../sections/PreFooter.astro";
+import FooterContent from "../sections/FooterContent.astro";
+
+/* Get Home */
+const RESPONSE = await fetch(import.meta.env.API_HOME);
+const HOME = await RESPONSE.json();
+// console.log(getHome);
+const ACF = HOME[0].acf;
+
+const ABOUT = ACF.about;
+const WORKS = ACF.work;
+const SERVICES = ACF.services;
+const CASES = ACF.case;
+
+// console.log(ACF)
+---
+
+<!-- INFORMATION -->
+<section
+  id="information"
+  class="relative bg-yellow w-full z-[999]"
+  style="display:none"
+>
+  <div class="header container row py-3">
+    <div class="col-[1/4] xg:col-[1/6]">
+      <Brand />
+    </div>
+
+    <div class="col-[4/9] xg:col-[6/10]">
+      <MoreInfo />
+    </div>
+
+    <div class="col-[9/13] xg:col-[10/13] flex justify-end">
+      <CurrenTime />
+    </div>
+  </div>
+
+  <!-- About -->
+  <article class="container row section animate anim-on" data-anim="bottom">
+    <div class="xg:col-[1/6]">
+      <h2>About</h2>
+    </div>
+    <div class="col-[1/13] xg:col-[6/12]">
+      <Fragment set:html={ABOUT} />
+    </div>
+  </article>
+
+  <!-- Experience -->
+  <article class="container row section animate anim-on" data-anim="bottom">
+    <div class="xg:col-[1/6]">
+      <h2>Experience</h2>
+    </div>
+
+    <div class="col-[1/13] xg:col-[6/12] grid grid-cols-2 md:grid-cols-3 gap-2">
+      {
+        WORKS &&
+          WORKS.map((work) => (
+            <div>
+              <h3 class="mb-2">{work.acfe_flexible_layout_title}</h3>
+              <Fragment set:html={work.work_txt} />
+            </div>
+          ))
+      }
+    </div>
+  </article>
+
+  <!-- Services -->
+  <article class="container row mt-6 mt-md-0 section-b">
+    <div class="xg:col-[1/6]">
+      <h2>Services</h2>
+    </div>
+
+    <div class="col-[1/13] xg:col-[6/12] grid grid-cols-2 md:grid-cols-3 gap-2">
+      {
+        SERVICES &&
+          SERVICES.map((serv) => (
+            <div>
+              <h3 class="mb-2">{serv.acfe_flexible_layout_title}</h3>
+              <Fragment set:html={serv.service_txt} />
+            </div>
+          ))
+      }
+    </div>
+  </article>
+
+  <!-- SELECTED CASES -->
+  <article class="my-6 xg:my-0">
+    <div class="container">
+      <h2 class="mb-6 xg:mb-2">Selected press, awards &amp; recognition</h2>
+    </div>
+
+    <div class="table line-top w-full">
+      <ul>
+        {
+          CASES &&
+            CASES.map((caso) => (
+
+              <li aria-describedby="Case">
+                <a
+                  href={caso.link}
+                  class="case"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <div class="col-[1-7] xg:col-[1/6]">
+                    {caso.acfe_flexible_layout_title}
+                  </div>
+                  <div class="xg:col-[6/8] hidden md:block">
+                    {caso.type}
+                  </div>
+                  <div class="col-[7/13] xg:col-[8/13]">
+                    <span class="md:hidden">Article:</span>
+                    {caso.company}
+                  </div>
+                </a>
+              </li>
+
+            ))
+        }
+      </ul>
+    </div>
+  </article>
+
+  <!-- Get in touch / Imprint -->
+  <PreFooter />
+
+  <FooterContent />
+  
+</section>

@@ -1,0 +1,61 @@
+---
+const { item = '', style = '', ext = 'jpeg', layout = "", anim = '' } = Astro.props
+
+let webpUrl = '';
+let itemUrl = '';
+let alt = '';
+let dataAnim = '';
+let video = false;
+let autoplay = '';
+
+function cleanAlt(texto) {
+  return texto.replace(/-/g, '');
+}
+
+if( anim != '' ){
+    dataAnim = `data-anim=${anim}`;
+}
+
+if( layout == 'Imagen'){
+
+  video = false;
+  itemUrl = item.img.url;
+  webpUrl = itemUrl.replace(/\.(png|jpg)$/i, '.webp');
+  alt = cleanAlt(item.img.title);
+
+}else{ // Video
+
+  video = true
+  itemUrl = item.video_url;
+
+}
+
+if( item.autoplay ){
+  autoplay = 'autoplay';
+}
+
+---
+{
+  !video ? (
+    
+  <picture>
+    <source srcset={ webpUrl } type="image/webp" data-anim="bottom"  >
+    <source srcset={ itemUrl } type={`image/${ext}`}>
+    <img class={style} src={ itemUrl } alt={alt} decoding="async" />
+  </picture>
+
+  ) : (
+
+    video && (
+      <video class="w-full aspect-video" preload controls muted  playsinline loop src={itemUrl} {autoplay} type="video/mp4" ></video>
+    ) 
+
+  )
+
+}
+
+<style>
+    img {
+        @apply w-full object-cover object-center ;
+    }
+</style>

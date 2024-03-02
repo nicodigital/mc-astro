@@ -1,0 +1,149 @@
+---
+import Layout from "../../layout/Layout.astro";
+import PictureVideo from '../../components/PictureVideo.astro'
+import charsCodes from "../../js/charsCodes";
+import types from "../../js/types";
+const homeUrl = import.meta.env.HOME_URL ?? "/";
+
+const { name } = Astro.params;
+// console.log(caso);
+
+// Esta función solo es necesaria en caso de preRendered
+export async function getStaticPaths() {
+  const response = await fetch(import.meta.env.API_CASES);
+  const cases = await response.json();
+
+  return cases.map((item) => {
+    return {
+      params: {
+        name: item.slug,
+      },
+    };
+  });
+} // GetStaticPaths
+
+/* Get Case */
+const response = await fetch(import.meta.env.API_CASES);
+const getCases = await response.json();
+const currCase = getCases.find((item) => item.slug == name);
+
+const TITLE = charsCodes(currCase.title.rendered);
+const ACF = currCase.acf;
+const YEAR = ACF.year;
+const CLIENT = ACF.client[0].name;
+// const AGENCY = ACF.agency[0].name;
+// let caseLink = '';
+
+const TYPE = ACF.type;
+const DESC = ACF.desc;
+const GALLERY = ACF.gallery;
+const WEBSITE = ACF.website;
+const PASS = ACF.pass;
+
+// if ( PASS ){
+//   caseLink = 'pass';
+// }else{
+
+// }
+// console.log(CLIENT);
+---
+
+<Layout
+  title={TITLE}
+  claim="Martin Corbo Design"
+  description="El nuevo framework de maquetación de sitios de I+D"
+>
+  <!-- Head Info -->
+  <section class="head-info animate anim-on" data-anim="bottom">
+    <div class="container row section-b items-start">
+      <div class="col-[1/13] xg:col-[1/6] mb-3 xg:mb-0">
+        <h1>
+          {CLIENT}
+        </h1>
+      </div>
+      <div class="col-[1/7] xg:col-[1/3]">
+        <p>
+          Year: <br />
+          Services:
+        </p>
+      </div>
+      <div class="col-[7/13] xg:col-[3/6]">
+        <p>
+          {YEAR}
+          <br />
+          {types(TYPE)}
+        </p>
+      </div>
+    </div>
+
+    <div class="container row section-b">
+      <div class="col-[1/7] xg:hidden">
+        <div class="toggle-info underline" data-toggle="info">
+          <span>More info</span>
+          <span>Less info</span>
+        </div>
+      </div>
+
+      <div class="col-[1/13] xg:col-[1/5] pointer-events-none">
+        <article>
+          <h2 class="xg:mb-6 hidden xg:block">Information</h2>
+
+          <div class="toggle-content" data-toggle="info">
+            <div class="mt-6 xg:mt-0">
+              <Fragment set:html={DESC} />
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="container row hidden xg:grid place-content-end ctr-gap-bottom">
+      <div class="col-[1/13] xg:col-[1/3]">
+        <a href={homeUrl} class="underline">
+          Back to Index
+        </a>
+      </div>
+
+      { WEBSITE && (
+          <div class="col-7-13 col-md-3-6">
+              <a href={WEBSITE} class="underline" target='_blank' rel='noreferrer noopener'  >
+                View Live site
+              </a>
+          </div>
+      ) }
+
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="Gallery" class="container row section-t ctr-gap-bottom animate anim-on" data-anim="bottom" >
+
+    { GALLERY && (
+
+    <div class="gallery col-[1/13] xg:col-[6/13] grid gap-2">
+
+      {
+        GALLERY.map( item => {
+
+          return <PictureVideo {item} style="animate" ext="webp" layout={item.acf_fc_layout} anim="bottom" />
+      
+        })
+      }
+
+    </div>
+
+    ) }
+  </section>
+
+  <section class="md:hidden ctr-gap-top pb-10">
+    <div class="container row">
+      <a href={homeUrl} class="underline">
+        Back to Index
+      </a>
+      <div class="col-[7/13] text-right">
+        <a href="#top" class="underline"> Back to top</a>
+      </div>
+    </div>
+  </section>
+
+</Layout>

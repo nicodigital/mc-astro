@@ -1,0 +1,11 @@
+#information{
+  @apply relative h-auto bg-yellow w-full z-[999] opacity-100 transition-all;
+}
+
+[data-info="off"]{
+
+  #information{
+    @apply h-0 pointer-events-none opacity-0;
+  }
+
+}

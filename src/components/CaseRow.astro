@@ -1,0 +1,58 @@
+---
+import Thumb from "../components/Thumb.astro";
+import types from "../js/types";
+
+const { caso } = Astro.props;
+const TITLE = caso.title.rendered;
+const SLUG = caso.slug;
+const CLIENT = caso.acf.client[0].name;
+const TYPE = caso.acf.type;
+const YEAR = caso.acf.year;
+const THUMBS = caso.acf.thumbnails;
+const PASS = caso.acf.pass;
+let caseLink = '';
+
+if ( PASS ){
+  caseLink = `pass/${SLUG}`;
+}else{
+  caseLink = `case/${SLUG}`;
+}
+
+//console.log(THUMBS)
+---
+
+<li aria-describedby="Case">
+
+<a href={caseLink} class="case" >
+  
+  <div class="col-[1/4] xg:col-[1/3]">
+    {CLIENT}
+  </div>
+
+  <div class="col-[4/7] xg:col-[3/6]"></div>
+
+  <div class="col-[7/11] xg:col-[6/12] relative">
+
+    {types(TYPE)}
+
+    <div class="thumbs">
+
+      {
+        THUMBS && (
+
+          THUMBS.map( thumb =>{
+            //console.log( thumb )
+            return <Thumb thumb={thumb} />
+
+          })
+
+        )
+      }
+    </div> <!-- Thumbs -->
+
+  </div>
+
+  <div class="col-[11/13] xg:col-[12/13] date">{YEAR}</div>
+
+</a>
+</li>

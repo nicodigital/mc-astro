@@ -1,10 +1,17 @@
 ---
-const { url = '#', style = '', ext = 'jpeg', alt = '', lazy = true } = Astro.props
+const { url = '#', style = '', ext = 'jpeg', anim = '', alt = '', lazy = true } = Astro.props
 const webpUrl = url.replace(/\.(png|jpg)$/i, '.webp');
+
+let dataAnim = '';
+
+if( anim != '' ){
+    dataAnim = `data-anim=${anim}`;
+}
+
 ---
 
 <picture>
-	<source srcset={ webpUrl } type="image/webp">
+	<source srcset={ webpUrl } type="image/webp" { dataAnim && dataAnim } >
 	<source srcset={ url } type={`image/${ext}`}>
 	<img class={style} src={ url } alt={alt} decoding="async" />
 </picture>

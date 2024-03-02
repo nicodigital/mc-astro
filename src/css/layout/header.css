@@ -1,15 +1,21 @@
-header{
+header, .header{
 
     @apply 
        relative
        h-[8rem] xg:h-[10rem]
-       py-2 md:py-3;
+       py-2 md:py-3 z-[999];
+       
+
+}
+
+header{
 
       [data-info="on"] &{
         display: none;
       }
 
 }
+
 
 .case, .password{
 
@@ -22,3 +28,12 @@ header{
 }
 
 
+@media (min-width: theme("screens.xg")) {
+
+    [data-page="case"] header, 
+    [data-page="pass"] header {
+        @apply fixed top-0 left-0;
+    }
+    
+  }
+    

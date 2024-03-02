@@ -1,5 +1,5 @@
 import checkDevice from '../js/checkDevice'
-// import smoothScroll from "../js/smoothscroll"
+import smoothScroll from "../js/smoothscroll"
 // import Rellax from "rellax";
 
 /*/////////////////////////////////////////////////////////////////////*/
@@ -50,13 +50,13 @@ let headerH = basic.headerH;
 /*///////////////////////// SCROLL MARKERS ////////////////////////////*/
 /*/////////////////////////////////////////////////////////////////////*/
 function setScrollPosition() {
-	
+
 	let lastScrollTop = ''
 
-  const body = document.querySelector('body');
-  const scrollPosition = window.scrollY;
-  const windowHeight = window.innerHeight;
-  const bodyHeight = document.body.scrollHeight;
+	const body = document.querySelector('body');
+	const scrollPosition = window.scrollY;
+	const windowHeight = window.innerHeight;
+	const bodyHeight = document.body.scrollHeight;
 	let footIn = false;
 
 	var footer = document.querySelector('footer'); // <-- Cambiar a footer 
@@ -69,7 +69,7 @@ function setScrollPosition() {
 	}
 
 	// Función de callback que se ejecuta cuando el elemento entra en la pantalla
-	var callback = function(entries, observer) {
+	var callback = function (entries, observer) {
 		entries.forEach(entry => {
 
 			if (entry.isIntersecting) {
@@ -77,7 +77,7 @@ function setScrollPosition() {
 				body.setAttribute('data-scroll', 'bottom');
 				// Puedes realizar aquí las acciones que desees cuando el elemento entre en pantalla
 				// Por ejemplo, cambiar su estilo, cargar contenido adicional, etc.
-			}else{
+			} else {
 
 				if (scrollPosition < 100) {
 					body.setAttribute('data-scroll', 'top');
@@ -94,7 +94,7 @@ function setScrollPosition() {
 	// Observa el elemento target
 	observer.observe(footer);
 
-	}
+}
 
 /*/////////////////////////////////////////////////////////////////////*/
 /*/////////////////////////// SMART MENU //////////////////////////////*/
@@ -122,50 +122,50 @@ function smart_menu() {
 
 function menuMobile() {
 
-  const btn_togg = document.querySelectorAll('.togg');
+	const btn_togg = document.querySelectorAll('.togg');
 
-  // Crea un elemento div que tenga un ancho forzado de desbordamiento
-  var scrollDiv = document.createElement('div');
-  scrollDiv.style.width = '100px';
-  scrollDiv.style.height = '100px';
-  scrollDiv.style.overflow = 'scroll';
+	// Crea un elemento div que tenga un ancho forzado de desbordamiento
+	var scrollDiv = document.createElement('div');
+	scrollDiv.style.width = '100px';
+	scrollDiv.style.height = '100px';
+	scrollDiv.style.overflow = 'scroll';
 
-  // Agrega el elemento al documento, pero fuera del área visible
-  document.body.appendChild(scrollDiv);
+	// Agrega el elemento al documento, pero fuera del área visible
+	document.body.appendChild(scrollDiv);
 
-  // Calcula el ancho de la barra de desplazamiento restando el ancho del contenido interno del div del ancho del div con desbordamiento
-  var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+	// Calcula el ancho de la barra de desplazamiento restando el ancho del contenido interno del div del ancho del div con desbordamiento
+	var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
 
-  // Elimina el div de prueba
-  document.body.removeChild(scrollDiv);
+	// Elimina el div de prueba
+	document.body.removeChild(scrollDiv);
 
-  // La variable "scrollbarWidth" ahora contiene el ancho de la barra de desplazamiento en píxeles
-  // console.log('Ancho de la barra de desplazamiento: ' + scrollbarWidth + ' píxeles');
+	// La variable "scrollbarWidth" ahora contiene el ancho de la barra de desplazamiento en píxeles
+	// console.log('Ancho de la barra de desplazamiento: ' + scrollbarWidth + ' píxeles');
 
 
-  function menuToggler() {
+	function menuToggler() {
 
-    const toggler = document.querySelector('body');
+		const toggler = document.querySelector('body');
 
-    if ( toggler.classList.contains('menu-in') ) {
+		if (toggler.classList.contains('menu-in')) {
 
-      toggler.classList.toggle('menu-in');
-      html.style.overflowY = 'auto';
-      body.style.overflowY = 'auto';
-      body.style.paddingRight = '0';
+			toggler.classList.toggle('menu-in');
+			html.style.overflowY = 'auto';
+			body.style.overflowY = 'auto';
+			body.style.paddingRight = '0';
 
-    } else {
-      toggler.classList.toggle('menu-in');
-      html.style.overflowY = 'hidden';
-      body.style.overflowY = 'hidden';
-      body.style.paddingRight = scrollbarWidth + 'px';
-    }
+		} else {
+			toggler.classList.toggle('menu-in');
+			html.style.overflowY = 'hidden';
+			body.style.overflowY = 'hidden';
+			body.style.paddingRight = scrollbarWidth + 'px';
+		}
 
-  }
+	}
 
-  btn_togg.forEach(btn => {
-    btn.onclick = () => menuToggler();
-  });
+	btn_togg.forEach(btn => {
+		btn.onclick = () => menuToggler();
+	});
 
 
 }
@@ -186,27 +186,23 @@ document.addEventListener('scroll', function () {
 document.addEventListener('DOMContentLoaded', function () {
 	setScrollPosition();
 	menuMobile();
+	animations();
+	moreInfo();
 });
 
 document.addEventListener('astro:after-swap', function () {
 	setScrollPosition();
-  smart_menu();
+	smart_menu();
 	menuMobile();
+	animations();
+	moreInfo();
 });
-
-/*/////////////////////////////////////////////////////////////////////*/
-/*///////////////////////////// RELLAX ////////////////////////////////*/
-/*/////////////////////////////////////////////////////////////////////*/
-
-// var rellax = new Rellax('.rellax', {
-// 	center: true
-// });
 
 /*/////////////////////////////////////////////////////////////////////*/
 /*//////////////////// ALERT GIRAR DISPOSITIVO ////////////////////////*/
 /*/////////////////////////////////////////////////////////////////////*/
 
-if ( device != 'desktop' ) {
+if (device != 'desktop') {
 
 	function rotateDeviceHorizontal() {
 		if (window.orientation === 0 || window.orientation === 180) {
@@ -222,7 +218,7 @@ if ( device != 'desktop' ) {
 		}
 	}
 
-	if ( device == 'bigTablet' ) {
+	if (device == 'bigTablet') {
 
 		rotateDeviceHorizontal();
 
@@ -232,7 +228,7 @@ if ( device != 'desktop' ) {
 
 	}
 
-	if ( device == 'mobile' && device != 'bigTablet' ) {
+	if (device == 'mobile' && device != 'bigTablet') {
 
 		rotateDeviceVertical()
 
@@ -245,69 +241,108 @@ if ( device != 'desktop' ) {
 }
 
 /*/////////////////////////////////////////////////////////////////////*/
-/*///////////////////////////// ANIMATIONS ////////////////////////////*/
+/*/////////////////////////// INFORMATION /////////////////////////////*/
 /*/////////////////////////////////////////////////////////////////////*/
 
-let animations = document.querySelectorAll(".animate");
+function moreInfo() {
 
-if (animations) {
+	const body = document.querySelector('body');
+	const btn_more_info = document.querySelectorAll(".more-info");
+	const information = document.querySelector("#information");
 
-	let lastScrollY = 0;
-	let delay = 0;
+	btn_more_info.forEach((btn) => {
 
-	/* Observer */
-	function triggerAnim(entries) {
+		btn.addEventListener("click", (e) => {
+			// e.preventDefault();
 
-		entries.forEach(entry => {
-			// console.log(entry);
+			const infoDisplay = body.dataset.info;
+			// console.log(infoDisplay);
 
-			if (window.scrollY > lastScrollY) {
-				delay = entry.target.dataset.delay || 0;
+			if (infoDisplay === "off") {
+				window.scrollTo({ top: 0 });
+				information.style.display = "block";
+				body.dataset.info = "on";
+			} else {
+				information.style.display = "none";
+				body.dataset.info = "off";
 			}
-
-			// Loop Normal /////////////////////////////////////////////////////
-			setTimeout(() => {
-				entry.target.classList.toggle('anim-on', entry.isIntersecting);
-			}, delay);
-
-			//Loop Once ////////////////////////////////////////////////////////
-			// if ( entry.isIntersecting ) {
-			// 	setTimeout(() => {
-			//         entry.target.classList.toggle('anim-on', true);
-			//         // Eliminar el elemento del observador después de la animación
-			//         observer.unobserve(entry.target);
-
-			//         // Agregar el elemento a la lista de elementos observados
-			//         observedElements.add(entry.target);
-			//      }, delay);
-			// }
-
-		})
-
-	}
-
-	const options = {
-		root: null, // aqui definimos el contenedor, cuando lo dejamos null, el contenedor es el viewport
-		rootMargin: '0px', // by default is 0 -> esto amplía el alcance del contenedor en la cantidad de pixeles que le asignemos
-		threshold: 0.4 // Si ponemos 0 el elmento se muestra apenas entra en el viewport
-		// Si ponemos 1 el elemento se muestra cuando entró totalmente en el viewport
-	}
-
-	const observer = new IntersectionObserver(triggerAnim, options);
-
-	window.addEventListener('scroll', () => {
-		lastScrollY = window.scrollY;
-	});
-
-	// Volver a observar los elementos después de recargar la página
-	window.addEventListener('load', () => {
-		animations.forEach(element => {
-			observer.observe(element);
 		});
+
 	});
 
 }
+/*/////////////////////////////////////////////////////////////////////*/
+/*///////////////////////////// ANIMATIONS ////////////////////////////*/
+/*/////////////////////////////////////////////////////////////////////*/
 
-// if ( device == 'desktop' ) {
-// 	smoothScroll();
-// }
+function animations() {
+
+	let observedElements = new Set();
+
+	let animations = document.querySelectorAll(".animate");
+
+	if (animations) {
+
+		let lastScrollY = 0;
+		let delay = 0;
+
+		/* Observer */
+		function triggerAnim(entries) {
+
+			entries.forEach(entry => {
+				// console.log(entry);
+
+				if (window.scrollY > lastScrollY) {
+					delay = entry.target.dataset.delay || 0;
+				}
+
+				// Loop Normal /////////////////////////////////////////////////////
+				// setTimeout(() => {
+				// 	entry.target.classList.toggle('anim-on', entry.isIntersecting);
+				// }, delay);
+
+				//Loop Once ////////////////////////////////////////////////////////
+				if (entry.isIntersecting) {
+					setTimeout(() => {
+						entry.target.classList.toggle('anim-on', true);
+						// Eliminar el elemento del observador después de la animación
+						observer.unobserve(entry.target);
+
+						// Agregar el elemento a la lista de elementos observados
+						observedElements.add(entry.target);
+					}, delay);
+				}
+
+			})
+
+		}
+
+		const options = {
+			root: null, // aqui definimos el contenedor, cuando lo dejamos null, el contenedor es el viewport
+			rootMargin: '0px', // by default is 0 -> esto amplía el alcance del contenedor en la cantidad de pixeles que le asignemos
+			threshold: 0.4 // Si ponemos 0 el elmento se muestra apenas entra en el viewport
+			// Si ponemos 1 el elemento se muestra cuando entró totalmente en el viewport
+		}
+
+		const observer = new IntersectionObserver(triggerAnim, options);
+
+		window.addEventListener('scroll', () => {
+			lastScrollY = window.scrollY;
+		});
+
+		// Volver a observar los elementos después de recargar la página
+		window.addEventListener('load', () => {
+			animations.forEach(element => {
+				observer.observe(element);
+			});
+		});
+
+	}
+
+}
+
+animations()
+
+if (device == 'desktop') {
+	smoothScroll();
+}

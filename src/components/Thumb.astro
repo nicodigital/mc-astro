@@ -1,0 +1,65 @@
+---
+const { thumb } = Astro.props;
+// console.log(thumb)
+const LAYOUT = thumb.acf_fc_layout;
+let video = true;
+let webpUrl = "";
+let itemUrl = "";
+let alt = "";
+let autoplay = '';
+
+function cleanAlt(texto) {
+  return texto.replace(/-/g, "");
+}
+
+if ( LAYOUT != "Imagen" ) {
+
+  // Video
+  video = true;
+  itemUrl = thumb.video_url;
+
+} else {
+
+  // Imagen
+  video = false;
+  itemUrl = thumb.img.sizes.medium;
+  webpUrl = itemUrl.replace(/\.(png|jpg)$/i, ".webp");
+  alt = cleanAlt(thumb.img.title);
+
+}
+---
+<style>
+  img,video{
+    @apply aspect-video object-cover ;
+  }
+</style>
+
+{
+  !video ? (
+    
+    <div>
+      <picture>
+        <source srcset={webpUrl} type="image/webp" data-anim="bottom" />
+        <source srcset={itemUrl} type={`image/jpeg`} />
+        <img src={itemUrl} alt={alt} loading="lazy" decoding="async" />
+      </picture>
+    </div>
+
+  ) : (
+
+  <div>
+      <video
+        preload
+        muted
+        playsinline
+        loop
+        src={itemUrl}
+        autoplay
+        type="video/mp4"
+      />
+    </div>
+
+  )
+
+}
+

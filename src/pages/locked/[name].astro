@@ -1,4 +1,5 @@
 ---
+export const prerender = false;
 import Layout from "../../layout/Layout.astro";
 import PictureVideo from "../../components/PictureVideo.astro";
 import MoreLess from "../../components/MoreLess.astro";
@@ -7,40 +8,26 @@ import types from "../../js/types";
 
 const homeUrl = import.meta.env.HOME_URL ?? "/";
 const currPath = Astro.url.pathname;
+const getPass = atob( Astro.url.searchParams.get('p')! || '' );
+
+console.log(getPass)
 
 const { name } = Astro.params;
 // console.log(caso);
-
-// Esta función solo es necesaria en caso de preRendered
-export async function getStaticPaths() {
-
-  const response = await fetch(import.meta.env.API_CASES);
-  const allCases = await response.json();
-
-  const casesFree = [];
-
-  allCases.map((item) => {
-    if( !item.acf.pass ){
-      casesFree.push(item);
-    }
-  });
-
-  return casesFree.map((item) => {
-    return {
-      params: {
-        name: item.slug,
-      },
-    };
-  });
-} // GetStaticPaths
 
 /* Get Case */
 const response = await fetch(import.meta.env.API_CASES);
 const getCases = await response.json();
 const currCase = getCases.find((item) => item.slug == name);
 
-const TITLE = charsCodes(currCase.title.rendered);
 const ACF = currCase.acf;
+const PASS = ACF.pass;
+
+if( PASS != getPass ){
+  return Astro.redirect('/');
+}
+
+const TITLE = charsCodes(currCase.title.rendered);
 const YEAR = ACF.year;
 const CLIENT = ACF.client[0].name;
 // const AGENCY = ACF.agency[0].name;
@@ -50,7 +37,7 @@ const TYPE = ACF.type;
 const DESC = ACF.desc;
 const GALLERY = ACF.gallery;
 const WEBSITE = ACF.website;
-const PASS = ACF.pass;
+
 
 // if ( PASS ){
 //   caseLink = 'pass';

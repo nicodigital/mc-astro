@@ -5,7 +5,7 @@ import netlify from "@astrojs/netlify";
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind()],
-  output: 'static',
+  output: 'hybrid',
 
   // Site y Base son para colocar un Build en producción - En este caso también configurar HOME_URL en .env
   // Aqui va el dominio

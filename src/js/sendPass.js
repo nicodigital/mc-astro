@@ -9,6 +9,7 @@ function sendPass(){
       const case_slug = passForm.querySelector('[name=case_slug]').value;
       const ajax_url = 'https://martincorbo.com/api/wp-json/wp/v2/cases?slug=' + case_slug;
       let pass = '';
+      let passCoded = "";
       // console.log(ajax_url)
 
       passForm.addEventListener("submit", async (e) => {
@@ -29,8 +30,10 @@ function sendPass(){
               const user_pass = passForm.querySelector('[name=user_pass]').value;
               pass = json[0].acf.pass;
 
+              passCoded = btoa(user_pass); // Codifica en base64
+
               if( user_pass === pass ){
-                window.location.href ="/case/"+ case_slug;
+                window.location.href ="/locked/"+ case_slug+"?p="+passCoded;
               }else{
                 result.innerHTML = "😭 Wrong password. Try again.";
               }

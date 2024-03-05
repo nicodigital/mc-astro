@@ -9,11 +9,7 @@ import types from "../../js/types";
 const homeUrl = import.meta.env.HOME_URL ?? "/";
 const currPath = Astro.url.pathname;
 const getPass = atob( Astro.url.searchParams.get('p')! || '' );
-
-console.log(getPass)
-
 const { name } = Astro.params;
-// console.log(caso);
 
 /* Get Case */
 const response = await fetch(import.meta.env.API_CASES);
@@ -30,21 +26,11 @@ if( PASS != getPass ){
 const TITLE = charsCodes(currCase.title.rendered);
 const YEAR = ACF.year;
 const CLIENT = ACF.client[0].name;
-// const AGENCY = ACF.agency[0].name;
-// let caseLink = '';
-
 const TYPE = ACF.type;
 const DESC = ACF.desc;
 const GALLERY = ACF.gallery;
 const WEBSITE = ACF.website;
 
-
-// if ( PASS ){
-//   caseLink = 'pass';
-// }else{
-
-// }
-// console.log(CLIENT);
 ---
 
 <style>

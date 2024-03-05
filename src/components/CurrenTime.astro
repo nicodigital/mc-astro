@@ -1,12 +1,30 @@
 ---
-// Obtiene la fecha y hora actual
-let now = new Date();
-// Establece la zona horaria a 'America/Montevideo' (Uruguay)
-let options = { timeZone: 'America/Montevideo', hour12: true, hour: '2-digit', minute: '2-digit' };
 
-// Obtiene la hora formateada en el formato deseado (12 horas con AM/PM)
-let formattedTime = now.toLocaleTimeString('en-US', options );
 ---
+<span class="time block h-fit"></span>
 
+<script>
 
-<span class="time block h-fit">{formattedTime}</span>
+    function currTime(){
+
+      // Obtiene la fecha y hora actual
+      let now = new Date();
+      // Establece la zona horaria a 'America/Montevideo' (Uruguay)
+      let options = { timeZone: 'America/Montevideo', hour12: true, hour: '2-digit', minute: '2-digit' };
+
+      // Obtiene la hora formateada en el formato deseado (12 horas con AM/PM)
+      let formattedTime = now.toLocaleTimeString('en-US', options );
+      document.querySelector('.time').innerHTML = formattedTime;
+
+    }
+
+    currTime()
+    // Programa la actualización del reloj cada minuto
+    setInterval(currTime, 60000); // 60000 milisegundos = 1 minuto      
+
+    document.addEventListener('astro:after-swap', function () {
+     currTime();
+     setInterval(currTime, 60000)
+    });
+
+</script>

@@ -38,16 +38,17 @@ if( item.autoplay ){
 {
   !video ? (
     
-  <picture>
-    <source srcset={ webpUrl } type="image/webp" data-anim="bottom"  >
+  <picture class='block animate' data-anim="bottom" >
+    <source srcset={ webpUrl } type="image/webp"  >
     <source srcset={ itemUrl } type={`image/${ext}`}>
-    <img class={style} src={ itemUrl } alt={alt} decoding="async" />
+    <img src={ itemUrl } alt={alt} decoding="async" loading="lazy" />
   </picture>
 
   ) : (
 
     video && (
-      <video class="w-full aspect-video" preload controls muted  playsinline loop src={itemUrl} {autoplay} type="video/mp4" ></video>
+      <video class="w-full aspect-video animate" data-anim="bottom"
+      preload controls muted  playsinline loop src={itemUrl} {autoplay} type="video/mp4" ></video>
     ) 
 
   )

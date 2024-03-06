@@ -173,8 +173,7 @@ const PASS = ACF.pass;
   <!-- Gallery -->
   <section
     id="Gallery"
-    class="container row section-t ctr-gap-bottom animate anim-on"
-    data-anim="bottom"
+    class="container row section-t ctr-gap-bottom "
   >
     {
       GALLERY && (
@@ -183,7 +182,6 @@ const PASS = ACF.pass;
             return (
               <PictureVideo
                 {item}
-                style="animate"
                 ext="webp"
                 layout={item.acf_fc_layout}
                 anim="bottom"

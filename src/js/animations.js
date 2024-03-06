@@ -1,53 +1,42 @@
-/*/////////////////////////////////////////////////////////////////////*/
-/*///////////////////////////// ANIMATIONS ////////////////////////////*/
-/*/////////////////////////////////////////////////////////////////////*/
+function animations() {
 
-function animations(){
+  const observedElements = new Set();
 
-  let animations = document.querySelectorAll(".animate");
+  const animations = document.querySelectorAll(".animate");
 
-  if (animations) {
-
+  if (animations.length > 0) {
     let lastScrollY = 0;
-    let delay = 0;
 
     /* Observer */
-    function triggerAnim(entries) {
+    const triggerAnim = (entries) => {
+      entries.forEach((entry) => {
 
-      entries.forEach(entry => {
-        // console.log(entry);
+        const delay = entry.target.dataset.delay || 0;
 
-        if (window.scrollY > lastScrollY) {
-          delay = entry.target.dataset.delay || 0;
-        }
+        const once = entry.target.dataset.once ?? "false"; // false 
 
-        // Loop Normal /////////////////////////////////////////////////////
-        // setTimeout(() => {
-        // 	entry.target.classList.toggle('anim-on', entry.isIntersecting);
-        // }, delay);
-
-        //Loop Once ////////////////////////////////////////////////////////
-        if ( entry.isIntersecting ) {
+        if (entry.isIntersecting) {
           setTimeout(() => {
-                entry.target.classList.toggle('anim-on', true);
-                // Eliminar el elemento del observador después de la animación
-                observer.unobserve(entry.target);
+            entry.target.classList.add('anim-on');
+            if (once) {
+              observedElements.add(entry.target);
+            }
+          }, delay);
+        } else {
 
-                // Agregar el elemento a la lista de elementos observados
-                observedElements.add(entry.target);
-            }, delay);
+          if ( once != 'true' ) {
+           entry.target.classList.remove('anim-on');
+          }
+
         }
-
-      })
-
-    }
+      });
+    };
 
     const options = {
-      root: null, // aqui definimos el contenedor, cuando lo dejamos null, el contenedor es el viewport
-      rootMargin: '0px', // by default is 0 -> esto amplía el alcance del contenedor en la cantidad de pixeles que le asignemos
-      threshold: 0.4 // Si ponemos 0 el elmento se muestra apenas entra en el viewport
-      // Si ponemos 1 el elemento se muestra cuando entró totalmente en el viewport
-    }
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.4
+    };
 
     const observer = new IntersectionObserver(triggerAnim, options);
 
@@ -55,15 +44,11 @@ function animations(){
       lastScrollY = window.scrollY;
     });
 
-    // Volver a observar los elementos después de recargar la página
-    window.addEventListener('load', () => {
-      animations.forEach(element => {
-        observer.observe(element);
-      });
+    animations.forEach(element => {
+      observer.observe(element);
     });
-
   }
 
 }
 
-export default animations
+export default animations;

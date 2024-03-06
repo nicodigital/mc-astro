@@ -1,5 +1,6 @@
 import checkDevice from '../js/checkDevice'
 import smoothScroll from "../js/smoothscroll"
+import animations from "../js/animations"
 // import Rellax from "rellax";
 
 /*/////////////////////////////////////////////////////////////////////*/
@@ -199,6 +200,38 @@ document.addEventListener('astro:after-swap', function () {
 });
 
 /*/////////////////////////////////////////////////////////////////////*/
+/*/////////////////////////// INFORMATION /////////////////////////////*/
+/*/////////////////////////////////////////////////////////////////////*/
+
+function moreInfo() {
+
+	const body = document.querySelector('body');
+	const btn_more_info = document.querySelectorAll(".more-info");
+	const information = document.querySelector("#information");
+
+	btn_more_info.forEach((btn) => {
+
+		btn.addEventListener("click", (e) => {
+			// e.preventDefault();
+
+			const infoDisplay = body.dataset.info;
+			// console.log(infoDisplay);
+
+			if (infoDisplay === "off") {
+				window.scrollTo({ top: 0 });
+				information.style.display = "block";
+				body.dataset.info = "on";
+			} else {
+				information.style.display = "none";
+				body.dataset.info = "off";
+			}
+		});
+
+	});
+
+}
+
+/*/////////////////////////////////////////////////////////////////////*/
 /*//////////////////// ALERT GIRAR DISPOSITIVO ////////////////////////*/
 /*/////////////////////////////////////////////////////////////////////*/
 
@@ -234,108 +267,6 @@ if (device != 'desktop') {
 
 		window.addEventListener("orientationchange", function () {
 			rotateDeviceVertical()
-		});
-
-	}
-
-}
-
-/*/////////////////////////////////////////////////////////////////////*/
-/*/////////////////////////// INFORMATION /////////////////////////////*/
-/*/////////////////////////////////////////////////////////////////////*/
-
-function moreInfo() {
-
-	const body = document.querySelector('body');
-	const btn_more_info = document.querySelectorAll(".more-info");
-	const information = document.querySelector("#information");
-
-	btn_more_info.forEach((btn) => {
-
-		btn.addEventListener("click", (e) => {
-			// e.preventDefault();
-
-			const infoDisplay = body.dataset.info;
-			// console.log(infoDisplay);
-
-			if (infoDisplay === "off") {
-				window.scrollTo({ top: 0 });
-				information.style.display = "block";
-				body.dataset.info = "on";
-			} else {
-				information.style.display = "none";
-				body.dataset.info = "off";
-			}
-		});
-
-	});
-
-}
-
-/*/////////////////////////////////////////////////////////////////////*/
-/*///////////////////////////// ANIMATIONS ////////////////////////////*/
-/*/////////////////////////////////////////////////////////////////////*/
-
-function animations() {
-
-	let observedElements = new Set();
-
-	let animations = document.querySelectorAll(".animate");
-
-	if (animations) {
-
-		let lastScrollY = 0;
-		let delay = 0;
-
-		/* Observer */
-		function triggerAnim(entries) {
-
-			entries.forEach(entry => {
-				// console.log(entry);
-
-				if (window.scrollY > lastScrollY) {
-					delay = entry.target.dataset.delay || 0;
-				}
-
-				// Loop Normal /////////////////////////////////////////////////////
-				// setTimeout(() => {
-				// 	entry.target.classList.toggle('anim-on', entry.isIntersecting);
-				// }, delay);
-
-				//Loop Once ////////////////////////////////////////////////////////
-				if (entry.isIntersecting) {
-					setTimeout(() => {
-						entry.target.classList.toggle('anim-on', true);
-						// Eliminar el elemento del observador después de la animación
-						observer.unobserve(entry.target);
-
-						// Agregar el elemento a la lista de elementos observados
-						observedElements.add(entry.target);
-					}, delay);
-				}
-
-			})
-
-		}
-
-		const options = {
-			root: null, // aqui definimos el contenedor, cuando lo dejamos null, el contenedor es el viewport
-			rootMargin: '0px', // by default is 0 -> esto amplía el alcance del contenedor en la cantidad de pixeles que le asignemos
-			threshold: 0.4 // Si ponemos 0 el elmento se muestra apenas entra en el viewport
-			// Si ponemos 1 el elemento se muestra cuando entró totalmente en el viewport
-		}
-
-		const observer = new IntersectionObserver(triggerAnim, options);
-
-		window.addEventListener('scroll', () => {
-			lastScrollY = window.scrollY;
-		});
-
-		// Volver a observar los elementos después de recargar la página
-		window.addEventListener('load', () => {
-			animations.forEach(element => {
-				observer.observe(element);
-			});
 		});
 
 	}

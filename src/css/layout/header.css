@@ -16,6 +16,18 @@ header{
 
 }
 
+.scroll-watcher{
+    @apply fixed h-[.5rem] w-[0] top-0 left-0 z-[9999] bg-black transition-all;
+    animation: scroll-watcher linear;
+    animation-timeline: scroll();
+}
+
+@keyframes scroll-watcher{
+    to{
+        width: 100%;
+    }
+}
+
 
 .case, .password{
 

@@ -1,7 +1,6 @@
 ---
-import type { GetStaticPaths } from "astro";
-import Layout from "../../layout/Layout.astro";
-import types from "../../js/types";
+import Layout from "@/layout/Layout.astro";
+import types from "@/js/types";
 
 const { case: caso } = Astro.params;
 // console.log(caso);
@@ -111,7 +110,7 @@ const YEAR = currCase.acf.year;
   </section>
 
   <script>
-    import sendPass from "../../js/sendPass";
+    import sendPass from "@/js/sendPass";
     sendPass();
   </script>
 </Layout>

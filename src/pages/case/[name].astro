@@ -1,9 +1,9 @@
 ---
-import Layout from "../../layout/Layout.astro";
-import PictureVideo from "../../components/PictureVideo.astro";
-import MoreLess from "../../components/MoreLess.astro";
-import charsCodes from "../../js/charsCodes";
-import types from "../../js/types";
+import Layout from "@/layout/Layout.astro";
+import PictureVideo from "@/components/PictureVideo.astro";
+import MoreLess from "@/components/MoreLess.astro";
+import charsCodes from "@/js/charsCodes";
+import types from "@/js/types";
 
 const homeUrl = import.meta.env.HOME_URL ?? "/";
 const currPath = Astro.url.pathname;
@@ -43,8 +43,6 @@ const TITLE = charsCodes(currCase.title.rendered);
 const ACF = currCase.acf;
 const YEAR = ACF.year;
 const CLIENT = ACF.client[0].name;
-// const AGENCY = ACF.agency[0].name;
-// let caseLink = '';
 
 const TYPE = ACF.type;
 const DESC = ACF.desc;
@@ -52,12 +50,6 @@ const GALLERY = ACF.gallery;
 const WEBSITE = ACF.website;
 const PASS = ACF.pass;
 
-// if ( PASS ){
-//   caseLink = 'pass';
-// }else{
-
-// }
-// console.log(CLIENT);
 ---
 
 <style>

@@ -1,6 +1,6 @@
-import checkDevice from '../js/checkDevice'
-import smoothScroll from "../js/smoothscroll"
-import animations from "../js/animations"
+import checkDevice from '@/js/checkDevice'
+import smoothScroll from "@/js/smoothscroll"
+import animations from "@/js/animations"
 // import Rellax from "rellax";
 
 /*/////////////////////////////////////////////////////////////////////*/

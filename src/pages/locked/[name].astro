@@ -1,14 +1,14 @@
 ---
 export const prerender = false;
-import Layout from "../../layout/Layout.astro";
-import PictureVideo from "../../components/PictureVideo.astro";
-import MoreLess from "../../components/MoreLess.astro";
-import charsCodes from "../../js/charsCodes";
-import types from "../../js/types";
+import Layout from "@/layout/Layout.astro";
+import PictureVideo from "@/components/PictureVideo.astro";
+import MoreLess from "@/components/MoreLess.astro";
+import charsCodes from "@/js/charsCodes";
+import types from "@/js/types";
 
 const homeUrl = import.meta.env.HOME_URL ?? "/";
 const currPath = Astro.url.pathname;
-const getPass = atob( Astro.url.searchParams.get('p')! || '' );
+const getPass = atob(Astro.url.searchParams.get("p")! || "");
 const { name } = Astro.params;
 
 /* Get Case */
@@ -19,8 +19,8 @@ const currCase = getCases.find((item) => item.slug == name);
 const ACF = currCase.acf;
 const PASS = ACF.pass;
 
-if( PASS != getPass ){
-  return Astro.redirect('/');
+if (PASS != getPass) {
+  return Astro.redirect("/");
 }
 
 const TITLE = charsCodes(currCase.title.rendered);
@@ -30,7 +30,6 @@ const TYPE = ACF.type;
 const DESC = ACF.desc;
 const GALLERY = ACF.gallery;
 const WEBSITE = ACF.website;
-
 ---
 
 <style>
@@ -53,11 +52,9 @@ const WEBSITE = ACF.website;
 
   /* DESKTOP */
   @media (min-width: theme("screens.xg")) {
-
-      .head-info{
-        position: fixed;
-      }
-
+    .head-info {
+      position: fixed;
+    }
   }
 </style>
 
@@ -140,14 +137,12 @@ const WEBSITE = ACF.website;
         }
       </div>
     </div>
-    
   </section>
 
   <!-- Gallery -->
   <section
     id="Gallery"
-    class="container row section-t ctr-gap-bottom animate anim-on"
-    data-anim="bottom"
+    class="container row section-t ctr-gap-bottom"
   >
     {
       GALLERY && (
@@ -156,7 +151,6 @@ const WEBSITE = ACF.website;
             return (
               <PictureVideo
                 {item}
-                style="animate"
                 ext="webp"
                 layout={item.acf_fc_layout}
                 anim="bottom"
@@ -178,5 +172,4 @@ const WEBSITE = ACF.website;
       </div>
     </div>
   </section>
-
 </Layout>

@@ -12,7 +12,7 @@ const firstUrlTerm = getFirstUrlTerm(currentPath);
 const dataPage = getPage(currPage, firstUrlTerm);
 
 ---
-<footer>
+<footer class="animate" data-anim="bottom" data-delay="400" >
     {
         dataPage !== "case" && dataPage !== "pass" && dataPage !== "locked" &&  <FooterContent />
     }

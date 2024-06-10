@@ -1,0 +1,26 @@
+---
+import "../css/layout/header.css";
+import Brand from "../components/Brand.astro";
+import MoreInfo from '../components/MoreInfo.astro'
+import CurrenTime from '../components/CurrenTime.astro'
+// import Burger from "../components/Burger.astro";
+const homeUrl = import.meta.env.HOME_URL ?? '/';
+
+
+---
+<div class="scroll-watcher"></div>
+
+<header class="container row" >
+    <div class="col-[1/4] xg:col-[1/6]">
+        <Brand/>
+    </div>
+    
+    <div class="col-[4/9] xg:col-[6/10]">
+        Coming Soon
+    </div>
+
+    <div class="col-[9/13] xg:col-[10/13] flex justify-end">
+        <CurrenTime/>
+    </div>
+
+</header>

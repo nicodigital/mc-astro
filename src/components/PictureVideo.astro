@@ -38,7 +38,7 @@ if( item.autoplay ){
 {
   !video ? (
     
-  <picture class='block animate' data-anim="bottom" >
+  <picture class='block animate' data-anim="bottom" data-once="true" >
     <source srcset={ webpUrl } type="image/webp"  >
     <source srcset={ itemUrl } type={`image/${ext}`}>
     <img src={ itemUrl } alt={alt} decoding="async" loading="lazy" />

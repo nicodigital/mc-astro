@@ -1,43 +1,52 @@
 ---
 // export const prerender = false;
 import Layout from "@/layout/Layout.astro";
-import ProjectsTable from '../sections/ProjectsTable.astro'
-import PreFooter from '../sections/PreFooter.astro'
 ---
 
+<style>
+  body {
+    background-color: theme("colors.yellow");
+    @apply flex flex-col justify-between h-screen overflow-hidden;
+  }
+</style>
 <Layout
   title="Martin Corbo Design"
   claim="Form. Follows. Function."
   description="Explore my vibrant portfolio showcasing innovative designs, where creativity meets functionality. Elevate your brand with my unique visual solutions."
 >
-
-<section class='container row section'>
- 
-    <div class='col-[1/13] xg:col-[1/6]'>
-      <h1 class="animate" data-anim="bottom" >Form. Follows. Function.</h1>
+  <section class="container row pt-2 pb-3 xg:py-5 3xl:py-6">
+    <div class="col-[1/13] xg:col-[1/6]">
+      <h1 class="animate" data-anim="bottom">Form. Follows. Function.</h1>
     </div>
- 
-    <div class='col-[1/13] xg:col-[6/11] mt-6 xg:mt-0'>
-        <p class="animate" data-anim="bottom" >
-          Martín Corbo is a graphic designer and art director known for his minimalistic and impactful designs. He focuses on creating timeless designs that cater to the specific needs and goals of each brand, helping them create enduring and memorable identities.
+
+    <div class="col-[1/13] xg:col-[6/11] mt-6 xg:mt-0">
+      <p class="animate" data-anim="bottom">
+        Martín Corbo is a graphic designer and art director known for his
+        minimalistic and impactful designs. He focuses on creating timeless
+        designs that cater to the specific needs and goals of each brand,
+        helping them create enduring and memorable identities.
+      </p>
+    </div>
+  </section>
+
+  <section class="pt-3 xg:pt-5 xg:pb-10 3xl:pt-6 3xl:pb-12">
+    <div class="container row mb-8 xg:mb-10">
+      <div class="col-[1/7] xg:col-[1/6]">
+        <h2 class="animate" data-anim="bottom" data-delay="200">
+          Get in Touch
+        </h2>
+      </div>
+
+      <div class="col-[7/13] xg:col-[6/11] animate" data-anim="bottom" data-delay="200">
+        <p>
+          For new project inquiries, please get in touch via email. <br />
+          <a class="underline" href="mailto:hola@martincorbo.com"> hola@martincorbo.com </a>
+          <br /><br />
+          <a class="underline" href="mailto:hola@martincorbo.com">porfolio upon request</a>
         </p>
+      </div>
     </div>
- 
-</section>
 
-<!-- Projects -->
-<section class="section"  >
-  <div class="container mb-8 xg:mb-10">
-    <h2 class="animate" data-anim="bottom" data-delay="200">
-      Selected Projects
-    </h2>
-  </div>
-  <div class="projects table w-full">
-    <ProjectsTable/>
-  </div>
-</section>
-
-<PreFooter/>
+  </section>
 
 </Layout>
-

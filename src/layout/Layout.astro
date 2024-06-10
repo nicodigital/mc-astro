@@ -2,9 +2,9 @@
 import { ViewTransitions } from "astro:transitions";
 
 /* Get Page */
-import getSlug from '../js/getSlug';
-import getFirstUrlTerm from '../js/getFirstUrlTerm';
-import getPage from '../js/getPage'
+import getSlug from "../js/getSlug";
+import getFirstUrlTerm from "../js/getFirstUrlTerm";
+import getPage from "../js/getPage";
 const currentPath = Astro.url.pathname;
 const currPage = getSlug(currentPath);
 const firstUrlTerm = getFirstUrlTerm(currentPath);
@@ -12,12 +12,13 @@ const dataPage = getPage(currPage, firstUrlTerm);
 
 import "../css/global.css";
 import Header from "./Header.astro";
+import HeaderSoon from "./HeaderSoon.astro";
 import Footer from "./Footer.astro";
-import Modal from "../components/Modal.astro";
+// import Modal from "../components/Modal.astro";
 import Favicon from "../components/Favicon.astro";
 import Seo from "../components/Seo.astro";
 // import getSlug from '../js/getSlug'
-import Information from '../sections/Information.astro'
+import Information from "../sections/Information.astro";
 
 const {
   title = "Martin Corbo Design",
@@ -26,9 +27,8 @@ const {
   image,
   robots,
 } = Astro.props;
-
-
 ---
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -47,23 +47,22 @@ const {
     <meta name="format-detection" content="telephone=no" />
     <ViewTransitions />
   </head>
-  <body id="top" data-page={dataPage} data-scroll="top" data-info="off" >
+  <body id="top" data-page={dataPage} data-scroll="top" data-info="off">
 
-    {
-      currPage !== "thanks" &&  <Header />
-    }
+    {currPage !== "thanks" && currPage !== "" && <Header />}
 
+    {currPage === "" && <HeaderSoon />}
+    
     <main>
       <slot />
     </main>
 
-    <Information/>
+    <Information />
 
-    {
-      currPage !== "thanks" && <Footer />
-    }
+    {currPage !== "thanks" && <Footer />}
 
-    <script> import "../js/globals";</script>
-    
+    <script>
+      import "../js/globals";
+    </script>
   </body>
 </html>
